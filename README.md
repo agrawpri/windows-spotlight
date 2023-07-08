@@ -1,2 +1,2 @@
 # windows-spotlight
-Utility to copy windows spotlight images to a folder of your choice so that they can be used as wallpapers and such.
+A simple utility to find and copy Windows spotlight images on your Windows PC to your preferred destination so that they can be used as wallpapers and such.
