@@ -22,7 +22,9 @@ DEFAULT_DEST_DIR = "C:\\Users\Admin\Pictures\\Spotlight"
 )
 def main(dest_dir):
     if os.name != "nt":
-        raise RuntimeError(f"This script can only be run on Windows (os.name returns '{os.name}'; should return 'nt').")
+        raise RuntimeError(
+            f"This script can only be run on Windows (os.name returns '{os.name}'; should return 'nt')."
+        )
 
     source_dir = Path(
         f"{os.environ['LOCALAPPDATA']}\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets"
