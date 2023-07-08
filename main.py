@@ -7,33 +7,38 @@ Author: Priyansh Agrawal (https://www.github.com/Priyansh121096)
 import os
 import shutil
 from pathlib import Path
+import click
 
 
-def get_src_dest_dirs():
-    return (
-        Path(
-            f"{os.environ['LOCALAPPDATA']}\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets"
-        ),
-        Path(f"C:\\Users\Admin\Pictures\\Spotlight"),
-    )
+DEFAULT_DEST_DIR = "C:\\Users\Admin\Pictures\\Spotlight"
 
 
-def main():
+@click.command()
+@click.option(
+    "--dest_dir",
+    "-d",
+    default=DEFAULT_DEST_DIR,
+    help=f"Directory to copy the images to. By default, images are copied to {DEFAULT_DEST_DIR}.",
+)
+def main(dest_dir):
     if os.name != "nt":
         raise RuntimeError(f"This script can only be run on Windows (os.name returns '{os.name}'; should return 'nt').")
 
-    SOURCE_DIR, DEST_DIR = get_src_dest_dirs()
+    source_dir = Path(
+        f"{os.environ['LOCALAPPDATA']}\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets"
+    )
+    dest_dir = Path(dest_dir)
 
-    if os.path.exists(DEST_DIR) and not os.path.isdir(DEST_DIR):
-        raise RuntimeError(f"{DEST_DIR} should be a directory.")
+    if os.path.exists(dest_dir) and not os.path.isdir(dest_dir):
+        raise RuntimeError(f"{dest_dir} should be a directory.")
 
-    if not os.path.exists(DEST_DIR):
-        print(f"Creating {DEST_DIR}")
-        os.mkdir(DEST_DIR)
+    if not os.path.exists(dest_dir):
+        print(f"Creating {dest_dir}")
+        os.mkdir(dest_dir)
 
-    for file in os.listdir(SOURCE_DIR):
-        source_path = SOURCE_DIR / file
-        dest_path = DEST_DIR / f"{file}.jpg"
+    for file in os.listdir(source_dir):
+        source_path = source_dir / file
+        dest_path = dest_dir / f"{file}.jpg"
 
         # Keep files larger than 1MB.
         if os.path.isfile(source_path) and (source_path.stat().st_size >> 20) >= 1:
