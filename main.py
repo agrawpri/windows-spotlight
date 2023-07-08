@@ -8,7 +8,9 @@ import os
 import shutil
 from pathlib import Path
 
-SOURCE_DIR = Path(f"{os.environ['LOCALAPPDATA']}\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets")
+SOURCE_DIR = Path(
+    f"{os.environ['LOCALAPPDATA']}\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets"
+)
 DEST_DIR = Path(f"C:\\Users\Admin\Pictures\\Spotlight")
 
 
@@ -32,5 +34,5 @@ def main():
     print("Done")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
