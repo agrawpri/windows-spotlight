@@ -8,13 +8,22 @@ import os
 import shutil
 from pathlib import Path
 
-SOURCE_DIR = Path(
-    f"{os.environ['LOCALAPPDATA']}\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets"
-)
-DEST_DIR = Path(f"C:\\Users\Admin\Pictures\\Spotlight")
+
+def get_src_dest_dirs():
+    return (
+        Path(
+            f"{os.environ['LOCALAPPDATA']}\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets"
+        ),
+        Path(f"C:\\Users\Admin\Pictures\\Spotlight"),
+    )
 
 
 def main():
+    if os.name != "nt":
+        raise RuntimeError(f"This script can only be run on Windows (os.name returns '{os.name}'; should return 'nt').")
+
+    SOURCE_DIR, DEST_DIR = get_src_dest_dirs()
+
     if os.path.exists(DEST_DIR) and not os.path.isdir(DEST_DIR):
         raise RuntimeError(f"{DEST_DIR} should be a directory.")
 
