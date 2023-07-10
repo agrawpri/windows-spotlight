@@ -21,7 +21,7 @@ to `C:\Users\Admin\Pictures\Spotlight`. Rerun once every day to copy new images 
 
 ## Run as a docker container
 ### Prerequisites
-**OS**: Windows(10+)
+**OS**: Windows(10+)  
 **Installations**: Docker desktop, git
 
 ### Steps
