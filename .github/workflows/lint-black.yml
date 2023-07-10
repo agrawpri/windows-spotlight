@@ -9,5 +9,5 @@ jobs:
       - uses: actions/checkout@v3
       - uses: psf/black@stable
         with:
-          options: "--check --verbose --line-length 100 -t py310"
+          options: "--check --verbose --line-length 100 -t py311"
           src: "."

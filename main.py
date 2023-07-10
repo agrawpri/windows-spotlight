@@ -1,35 +1,21 @@
 """
-Copies windows spotlight images to C:\\Users\Admin\Pictures\\Spotlight. You can then use them as wallpapers or do
-anything that you want with them.
+Copies windows spotlight images from --src_dir to --dest_dir.
 
 Author: Priyansh Agrawal (https://www.github.com/Priyansh121096)
 """
 import os
 import shutil
 from pathlib import Path
+
 import click
 
 
-DEFAULT_DEST_DIR = "C:\\Users\Admin\Pictures\\Spotlight"
-
-
-@click.command()
-@click.option(
-    "--dest_dir",
-    "-d",
-    default=DEFAULT_DEST_DIR,
-    help=f"Directory to copy the images to. By default, images are copied to {DEFAULT_DEST_DIR}.",
-)
-def main(dest_dir):
-    if os.name != "nt":
-        raise RuntimeError(
-            f"This script can only be run on Windows (os.name returns '{os.name}'; should return 'nt')."
-        )
-
-    source_dir = Path(
-        f"{os.environ['LOCALAPPDATA']}\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets"
-    )
-    dest_dir = Path(dest_dir)
+def main(src_dir: str, dest_dir: str):
+    # if os.name != "nt":
+    #     raise RuntimeError(
+    #         f"This script can only be run on Windows (os.name returns '{os.name}'; should return 'nt')."
+    #     )
+    src_dir, dest_dir = Path(src_dir), Path(dest_dir)
 
     if os.path.exists(dest_dir) and not os.path.isdir(dest_dir):
         raise RuntimeError(f"{dest_dir} should be a directory.")
@@ -38,8 +24,8 @@ def main(dest_dir):
         print(f"Creating {dest_dir}")
         os.mkdir(dest_dir)
 
-    for file in os.listdir(source_dir):
-        source_path = source_dir / file
+    for file in os.listdir(src_dir):
+        source_path = src_dir / file
         dest_path = dest_dir / f"{file}.jpg"
 
         # Keep files larger than 1MB.
@@ -50,5 +36,16 @@ def main(dest_dir):
     print("Done")
 
 
+@click.command()
+@click.option("--src_dir", "-s", help="Directory where the spotlight images are stored.")
+@click.option(
+    "--dest_dir",
+    "-d",
+    help="Directory to copy the images to.",
+)
+def run(src_dir: str, dest_dir: str):
+    return main(src_dir, dest_dir)
+
+
 if __name__ == "__main__":
-    main()
+    run()

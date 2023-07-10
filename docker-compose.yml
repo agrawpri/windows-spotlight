@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  windows-spotlight:
+    build:
+      context: .
+    volumes:
+      - .:/app/
+      - ${LOCALAPPDATA}\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets:/src/:ro
+      - C:\\Users\Admin\Pictures\\Spotlight:/dest/
+    command:
+      - "python"
+      - "/app/main.py"
+      - "--src_dir"
+      - "/src/"
+      - "--dest_dir"
+      - "/dest/"
