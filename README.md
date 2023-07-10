@@ -1,3 +1,5 @@
+![Docker Image Size (tag)](https://img.shields.io/docker/image-size/agrawpri/windows-spotlight/latest)
+
 # windows-spotlight
 A simple utility to find and copy Windows spotlight images on your Windows PC to your preferred destination so that they
 can be used as wallpapers and such.
