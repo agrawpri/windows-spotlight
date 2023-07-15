@@ -1,0 +1,2 @@
+  - [ ] Figure out how to distribute the .exe
+  - [ ] See if the destination directory can be provided to the .exe via the Windows "Browse" UI
