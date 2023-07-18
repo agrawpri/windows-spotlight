@@ -2,3 +2,4 @@
   - [ ] Figure out how to distribute the .exe
   - [ ] See if the destination directory can be provided to the .exe via the Windows "Browse" UI
   - [ ] Add screenshots/gifs to the README
+  - [ ] Reduce image size
